@@ -730,6 +730,7 @@ in {
               ${optionalString (c.dbtableprefix != null) "'dbtableprefix' => '${toString c.dbtableprefix}',"}
               ${optionalString (c.dbpassFile != null) "'dbpassword' => nix_read_secret('${c.dbpassFile}'),"}
               'dbtype' => '${c.dbtype}',
+              'overwrite.cli.url' => '${if cfg.https then "https" else "http"}://${cfg.hostName}',
               'trusted_domains' => ${writePhpArrary ([ cfg.hostName ] ++ c.extraTrustedDomains)},
               'trusted_proxies' => ${writePhpArrary (c.trustedProxies)},
               ${optionalString (c.defaultPhoneRegion != null) "'default_phone_region' => '${c.defaultPhoneRegion}',"}
